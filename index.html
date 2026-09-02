@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨Selamat datang</title>
-   
+    <title>Mengalihkan...</title>
+     <script defer src="https://cloud.umami.is/script.js" data-website-id="e3c0c569-9472-4eef-8446-304bbc6d58e8"></script>
     <style>
-        /* 全局样式 - 干净、柔和、有层次 */
+        /* 重置默认边距，使用 Flex 实现全屏居中 */
         * {
             margin: 0;
             padding: 0;
@@ -14,225 +14,107 @@
         }
 
         body {
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;                /* 手机全屏高度 */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
-            background: linear-gradient(145deg, #f7f0fc 0%, #e9def0 100%);
-            /* 柔和的渐变背景 */
+            flex-direction: column;
+            justify-content: center;          /* 垂直居中 */
+            align-items: center;              /* 水平居中 */
+            background: #f5f7fa;
+            color: #333;
+            text-align: center;
             padding: 20px;
         }
 
-        /* 主卡片 - 磨砂玻璃效果 */
-        .card {
-            max-width: 600px;
-            width: 100%;
-            padding: 50px 40px 45px;
-            background: rgba(255, 255, 255, 0.60);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border-radius: 48px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
-                        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-            text-align: center;
-            transition: transform 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .card:hover {
-            transform: scale(1.01);
-        }
-
-        /* 装饰小圆点 - 丰富视觉 */
-        .dots {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-        .dots span {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #b8a0c9;
-            opacity: 0.5;
-            animation: pulse 2.4s infinite ease-in-out;
-        }
-        .dots span:nth-child(2) { animation-delay: 0.4s; background: #a78abf; }
-        .dots span:nth-child(3) { animation-delay: 0.8s; background: #c4b0d4; }
-        .dots span:nth-child(4) { animation-delay: 1.2s; background: #d4c2e0; }
-        .dots span:nth-child(5) { animation-delay: 1.6s; background: #b8a0c9; }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.4); }
-        }
-
-        /* 主标题 - 欢迎语 */
-        .welcome {
-            font-size: 3.2rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: #2d1b3d;
-            margin-bottom: 12px;
-            line-height: 1.2;
-        }
-        .welcome .highlight {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* 副标题 / 提示文字 */
-        .sub {
-            font-size: 1.1rem;
-            color: #5b4a6b;
-            margin-bottom: 32px;
-            font-weight: 350;
-            letter-spacing: 0.3px;
-        }
-
-        /* 进度条容器 - 视觉化跳转倒计时 */
-        .progress-wrap {
-            background: rgba(200, 180, 215, 0.3);
-            height: 6px;
-            border-radius: 99px;
-            overflow: hidden;
+        h1 {
             margin-bottom: 20px;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #a855f7, #7c3aed);
-            border-radius: 99px;
-            transition: width 0.1s linear;
+            font-size: 24px;
         }
 
-        /* 跳转信息 - 显示目标链接 */
-        .target-info {
-            font-size: 0.9rem;
-            color: #7a6a8a;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 12px 18px;
-            border-radius: 60px;
+        /* ----- 图标容器，负责旋转动画 ----- */
+        .icon-wrapper {
             display: inline-block;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            margin-top: 6px;
-            font-weight: 350;
-        }
-        .target-info strong {
-            color: #4a2d5e;
-            font-weight: 500;
+            line-height: 1;
+            animation: spin 1s linear infinite; /* 匀速旋转 */
+            margin-bottom: 20px;
         }
 
-        /* 小装饰 - 底部光晕 */
-        .glow {
-            position: fixed;
-            top: -20%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        .glow-left {
-            left: -10%;
-            top: 30%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+        /* 图片本身尺寸控制 */
+        .icon-wrapper img {
+            width: 80px;      /* 调整为你想要的大小 */
+            height: 80px;
+            display: block;   /* 避免下方小间隙 */
         }
 
-        /* 响应式 */
+        /* 旋转动画 */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        p#countdown {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* 手机端适配（可忽略，因为上面已经全屏居中） */
         @media (max-width: 480px) {
-            .card { padding: 36px 24px 32px; }
-            .welcome { font-size: 2.4rem; }
-            .sub { font-size: 1rem; }
+            .icon-wrapper img {
+                width: 60px;   /* 手机屏幕适当缩小图标 */
+                height: 60px;
+            }
+            h1 {
+                font-size: 20px;
+            }
         }
     </style>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="e3c0c569-9472-4eef-8446-304bbc6d58e8"></script>
 </head>
 <body>
 
+    <h1></h1>
 
-    <div class="glow"></div>
-    <div class="glow glow-left" style="position:fixed; left:-10%; top:30%; width:400px; height:400px; background:radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%); pointer-events:none; z-index:-1;"></div>
-
-    <div class="card">
-
-        <div class="dots">
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
-
-
-        <h1 class="welcome">
-            Welcome...<span class="highlight"> </span>
-        </h1>
-        <p class="sub">Page loading...</p>
-
-
-        <div class="progress-wrap">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-
-        <div class="target-info" id="targetDisplay">
-            🎰100% Bonus🎰：<strong id="linkName">…</strong>
-        </div>
+    <!-- 图片旋转图标 -->
+    <div class="icon-wrapper">
+        <img src="https://pub-accea120abaf47d3afac9bbaf7fd26da.r2.dev/favicon.png" alt="YK1">
     </div>
+
+    <p id="countdown">YK1...</p>
 
     <script>
         (function() {
-            // ============================================================
-
-            // ============================================================
-            const links = [
-                { name: 'YK1', url: 'https://866397.com' },
-                { name: 'YK1', url: 'https://688716.com' },
-                { name: 'YK1', url: 'https://688681.com' },
-                { name: 'YK1', url: 'https://688672.com' },
-                { name: 'YK1', url: 'https://688650.com' }
+            // 你的 5 个跳转站点
+            const sites = [
+                'https://866397.com',
+                'https://688716.com',
+                'https://688681.com',
+                'https://688672.com',
+                'https://688650.com'
             ];
 
+            const randomIndex = Math.floor(Math.random() * sites.length);
+            const targetUrl = sites[randomIndex];
 
-            const randomIndex = Math.floor(Math.random() * links.length);
-            const selected = links[randomIndex];
-            const targetUrl = selected.url;
-            const targetName = selected.name;
+            const countdownEl = document.getElementById('countdown');
+            let seconds = 1;
 
-
-            document.getElementById('linkName').textContent = targetName;
-
-
-            console.log(`🎯 选中：${targetName} → ${targetUrl}`);
-
-            // ---- 进度条动画（2.5 秒内从 0% → 100%） ----
-            const progressBar = document.getElementById('progressBar');
-            const duration = 1500;          // 2.5 秒
-            const startTime = performance.now();
-
-            function updateProgress() {
-                const elapsed = performance.now() - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                progressBar.style.width = (progress * 100) + '%';
-                if (progress < 1) {
-                    requestAnimationFrame(updateProgress);
-                }
-            }
-            requestAnimationFrame(updateProgress);
-
-            // ---- 2.5 秒后跳转 ----
+            // 1.5 秒后跳转（和你原来一致）
             setTimeout(function() {
                 window.location.href = targetUrl;
-            }, duration);
+            }, 1500);
 
+            // 倒计时文本更新（仅显示效果，不影响跳转）
+            if (countdownEl) {
+                const interval = setInterval(function() {
+                    seconds--;
+                    if (seconds > 0) {
+                        countdownEl.textContent = seconds + ' 秒后自动跳转';
+                    } else {
+                        countdownEl.textContent = 'Welcome...';
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            }
         })();
     </script>
 </body>
